@@ -20,6 +20,70 @@ CONF_STATION_ID = 'station_id'
 
 DEFAULTNAME = "SEMS Portal"
 
+ATTR_ICON = "icon"
+ATTR_LABEL = "label"
+ATTR_UNIT = "unit"
+
+KWH = "kWh"
+VOLT = "V"
+HZ= "Hz"
+
+SENSOR_TYPES = {
+    ATTR_INVERTER_TYPE: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:blur",
+        ATTR_LABEL: ATTR_INVERTER_TYPE,
+        ATTR_UNIT: None,
+    },
+    ATTR_INVERTER_STATUS: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:lan-connect",
+        ATTR_LABEL: ATTR_API_HUMIDITY.capitalize(),
+        ATTR_UNIT: None,
+    },
+    ATTR_SOLAR_POWER: {
+        ATTR_DEVICE_CLASS: DEVICE_CLASS_POWER,
+        ATTR_ICON: "mdi:solar-power",
+        ATTR_LABEL: ATTR_API_PRESSURE.capitalize(),
+        ATTR_UNIT: PRESSURE_HPA,
+    },
+    ATTR_PRODUCED_TODAY: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:flash",
+        ATTR_LABEL: ATTR_API_TEMPERATURE.capitalize(),
+        ATTR_UNIT: KWH,
+    },    
+    ATTR_PRODUCED_THIS_MONTH: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:flash",
+        ATTR_LABEL: ATTR_API_PM1,
+        ATTR_UNIT: KWH,
+    },
+    ATTR_PRODUCED_TOTAL: {
+        ATTR_DEVICE_CLASS: DEVICE_CLASS_HUMIDITY,
+        ATTR_ICON: "mdi:flash",
+        ATTR_LABEL: ATTR_API_HUMIDITY.capitalize(),
+        ATTR_UNIT: KHW,
+    },
+    ATTR_INVERTER_TEMP: {
+        ATTR_DEVICE_CLASS: DEVICE_CLASS_PRESSURE,
+        ATTR_ICON: "mdi:thermometer",
+        ATTR_LABEL: ATTR_PRODUCED_TOTAL,
+        ATTR_UNIT: TEMP_CELSIUS,
+    },
+    ATTR_GRID_VOLT: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:current-ac",
+        ATTR_LABEL: ATTR_GRID_VOLT,
+        ATTR_UNIT: VOLT,
+    },
+    ATTR_GRID_FREQ: {
+        ATTR_DEVICE_CLASS: None,
+        ATTR_ICON: "mdi:current-ac",
+        ATTR_LABEL: ATTR_GRID_FREQ:,
+        ATTR_UNIT: HZ,
+}
+
 # Validation of the user's configuration
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default = DEFAULTNAME): cv.string,
