@@ -38,37 +38,37 @@ SENSOR_TYPES = {
     ATTR_INVERTER_STATUS: {
         ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:lan-connect",
-        ATTR_LABEL: ATTR_API_HUMIDITY.capitalize(),
+        ATTR_LABEL: ATTR_INVERTER_STATUS,
         ATTR_UNIT: None,
     },
     ATTR_SOLAR_POWER: {
         ATTR_DEVICE_CLASS: DEVICE_CLASS_POWER,
         ATTR_ICON: "mdi:solar-power",
-        ATTR_LABEL: ATTR_API_PRESSURE.capitalize(),
+        ATTR_LABEL: ATTR_SOLAR_POWER,
         ATTR_UNIT: PRESSURE_HPA,
     },
     ATTR_PRODUCED_TODAY: {
         ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:flash",
-        ATTR_LABEL: ATTR_API_TEMPERATURE.capitalize(),
+        ATTR_LABEL: ATTR_PRODUCED_TODAY,
         ATTR_UNIT: KWH,
     },    
     ATTR_PRODUCED_THIS_MONTH: {
         ATTR_DEVICE_CLASS: None,
         ATTR_ICON: "mdi:flash",
-        ATTR_LABEL: ATTR_API_PM1,
+        ATTR_LABEL: ATTR_PRODUCED_THIS_MONTH,
         ATTR_UNIT: KWH,
     },
     ATTR_PRODUCED_TOTAL: {
         ATTR_DEVICE_CLASS: DEVICE_CLASS_HUMIDITY,
         ATTR_ICON: "mdi:flash",
-        ATTR_LABEL: ATTR_API_HUMIDITY.capitalize(),
+        ATTR_LABEL: ATTR_PRODUCED_TOTAL,
         ATTR_UNIT: KHW,
     },
     ATTR_INVERTER_TEMP: {
         ATTR_DEVICE_CLASS: DEVICE_CLASS_PRESSURE,
         ATTR_ICON: "mdi:thermometer",
-        ATTR_LABEL: ATTR_PRODUCED_TOTAL,
+        ATTR_LABEL: ATTR_INVERTER_TEMP,
         ATTR_UNIT: TEMP_CELSIUS,
     },
     ATTR_GRID_VOLT: {
@@ -95,12 +95,15 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 _LOGGER = logging.getLogger(__name__)
 
 
-
-
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the GoodWe SEMS portal scraper platform."""
     # Add devices
-    add_devices([SemsSensor(config[CONF_NAME], config)], True)
+    
+    sensors = []
+    for sensor in SENSOR_TYPES:
+        sensors.append(GoodWeApi(station, user, password))
+    
+    add_devices(sensors, True)
 
 class GoodWeApi:
 
